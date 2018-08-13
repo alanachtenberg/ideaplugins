@@ -1,0 +1,29 @@
+<idea-plugin>
+    <id>com.alan.refactor</id>
+    <name>Plugin display name here</name>
+    <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+
+    <description><![CDATA[
+    Enter short description for your plugin here.<br>
+    <em>most HTML tags may be used</em>
+    ]]></description>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <localInspection displayName="EasyMockToMockito" groupName="Java"
+                         implementationClass="com.easy2mockito.inspection.Easy2MockitoInspection"/>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+        <action id="Hello" class="HelloAction" text="HelloAction" description="simple action that says hello">
+            <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt H"/>
+        </action>
+    </actions>
+</idea-plugin>

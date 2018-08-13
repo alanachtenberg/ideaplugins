@@ -1,0 +1,44 @@
+plugins {
+    id 'org.jetbrains.intellij' version '0.3.5'
+}
+
+group 'com.alan'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    projectRuntime // required dependencies for project where plugin is applied.
+}
+
+dependencies {
+    projectRuntime group: 'org.easymock', name: 'easymock', version: '2.0'
+    projectRuntime group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
+}
+
+intellij {
+    version '2018.2'
+}
+patchPluginXml {
+    changeNotes """
+      Add change notes here.<br>
+      <em>most HTML tags may be used</em>"""
+}
+
+task cleanProjectRuntime(type: Delete){
+    delete "projectRuntimeLibs"
+}
+
+task copyProjectRuntime(type: Copy){
+    into "projectRuntimeLibs"
+    from configurations.projectRuntime
+}
+
+clean.dependsOn(cleanProjectRuntime)
+test.dependsOn(copyProjectRuntime)
