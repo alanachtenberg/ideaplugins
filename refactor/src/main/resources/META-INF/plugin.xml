@@ -5,7 +5,7 @@
     <vendor email="support@yourcompany.com" url="https://github.com/alanachtenberg/ideaplugins">Alan Achtenberg</vendor>
 
     <description><![CDATA[
-    Convert easy mock usages to mockito.<br>
+    Convert EasyMock usages to Mockito.<br>
     Ex. replace EasyMock.createMock() with Mockito.mock()
     ]]></description>
 

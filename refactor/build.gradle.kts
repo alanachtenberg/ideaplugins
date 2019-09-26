@@ -1,16 +1,22 @@
+group = "com.alan"
+version = "1.0-SNAPSHOT"
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath(kotlin("gradle-plugin", version = "1.3.31"))
+    }
+}
+
 plugins {
-    java
+    kotlin("jvm") version "1.3.31"
     id("org.jetbrains.intellij") version "0.4.10"
 }
 
 repositories {
     mavenCentral()
-}
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    group = "com.alan"
-    version = "1.0-SNAPSHOT"
 }
 
 val projectRuntime: Configuration by configurations.creating
@@ -21,7 +27,7 @@ dependencies {
 }
 
 intellij {
-    version = "2019.2"
+    version = "2019.2.3"
     setPlugins("java")
 }
 
