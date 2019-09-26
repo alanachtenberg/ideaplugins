@@ -11,10 +11,12 @@ import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiField;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiMember;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.PsiMethodCallExpression;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
 
 public class Easy2MockitoInspection extends AbstractBaseJavaLocalInspectionTool {
 
@@ -50,30 +52,22 @@ public class Easy2MockitoInspection extends AbstractBaseJavaLocalInspectionTool 
             @Override
             public void visitMethodCallExpression(PsiMethodCallExpression expression) {
                 if (expression.getContainingFile().getFileType().getDefaultExtension().equals("java")) {
-                    addDescriptors(checkMethodCallExpression(expression, holder.getManager(), isOnTheFly));
+                    checkMethodCallExpression(expression, holder.getManager(), isOnTheFly).ifPresent(holder::registerProblem);
                 }
             }
 
-            private void addDescriptors(final ProblemDescriptor[] descriptors) {
-                if (descriptors != null) {
-                    for (ProblemDescriptor descriptor : descriptors) {
-                        holder.registerProblem(descriptor);
-                    }
-                }
-            }
         };
     }
 
-    @Nullable
-    public ProblemDescriptor[] checkMethodCallExpression(@NotNull PsiMethodCallExpression expression, @NotNull InspectionManager manager, boolean isOnTheFly) {
-        if (expression.getText().matches(".*create.*Mock.*")){
-            PsiMethod psiMethod = expression.resolveMethod();
-            if (psiMethod.getContainingClass().getQualifiedName().equals("org.easymock.EasyMock")) {
-                ProblemDescriptor descriptor = manager.createProblemDescriptor(expression, "Easy2Mockito", new ReplaceWithMockitoFix(expression), ProblemHighlightType.WEAK_WARNING, isOnTheFly);
-                return new ProblemDescriptor[]{descriptor};
-            }
+    @NotNull
+    private Optional<ProblemDescriptor> checkMethodCallExpression(@NotNull PsiMethodCallExpression expression, @NotNull InspectionManager manager, boolean isOnTheFly) {
+        if (expression.getText().matches(".*create.*Mock.*")) {
+            return Optional.ofNullable(expression.resolveMethod())
+                    .map(PsiMember::getContainingClass)
+                    .map(PsiClass::getQualifiedName)
+                    .filter(name -> name.equals("org.easymock.EasyMock"))
+                    .map(name -> manager.createProblemDescriptor(expression, "Easy2Mockito", new ReplaceWithMockitoFix(expression), ProblemHighlightType.WEAK_WARNING, isOnTheFly));
         }
-        return null;
+        return Optional.empty();
     }
-
 }

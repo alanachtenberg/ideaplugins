@@ -1,11 +1,12 @@
 <idea-plugin>
     <id>com.alan.refactor</id>
-    <name>Plugin display name here</name>
-    <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+    <name>EasyMock2Mockito</name>
+    <!--suppress PluginXmlValidity -->
+    <vendor email="support@yourcompany.com" url="https://github.com/alanachtenberg/ideaplugins">Alan Achtenberg</vendor>
 
     <description><![CDATA[
-    Enter short description for your plugin here.<br>
-    <em>most HTML tags may be used</em>
+    Convert easy mock usages to mockito.<br>
+    Ex. replace EasyMock.createMock() with Mockito.mock()
     ]]></description>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
@@ -22,7 +23,7 @@
 
     <actions>
         <!-- Add your actions here -->
-        <action id="Hello" class="HelloAction" text="HelloAction" description="simple action that says hello">
+        <action id="Hello" class="HelloAction" text="HelloAction" description="Simple action that says hello">
             <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt H"/>
         </action>
     </actions>

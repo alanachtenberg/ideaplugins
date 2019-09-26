@@ -4,12 +4,12 @@ import com.intellij.codeInsight.intention.IntentionAction;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.testFramework.LightProjectDescriptor;
-import com.intellij.testFramework.fixtures.LightPlatformCodeInsightFixtureTestCase;
+import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 import org.junit.Assert;
 
 import java.io.File;
 
-public class Easy2MockitoInspectionTest extends LightPlatformCodeInsightFixtureTestCase {
+public class Easy2MockitoInspectionTest extends BasePlatformTestCase {
 
     @Override
     protected String getTestDataPath() {
@@ -32,6 +32,7 @@ public class Easy2MockitoInspectionTest extends LightPlatformCodeInsightFixtureT
         super.setUp();
         myFixture.copyDirectoryToProject("", "");
         myFixture.configureByFile("input/Test.java");
+        //noinspection unchecked
         myFixture.enableInspections(Easy2MockitoInspection.class);
     }
 

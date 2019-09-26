@@ -12,7 +12,7 @@ public class Test {
         createMock(Test.class)
     }
 
-    public void newMethod(){
+    public void newMethod() {
 
     }
 }

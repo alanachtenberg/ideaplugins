@@ -2,7 +2,7 @@ package com.apackage;
 
 public class EasyMock {
 
-    public static void createMock(Class clazz){
+    public static void createMock(Class clazz) {
 
     }
 }

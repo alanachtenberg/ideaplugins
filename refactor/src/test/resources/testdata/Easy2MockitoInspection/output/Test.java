@@ -10,7 +10,7 @@ public class Test {
         Mockito.mock(Test.class)
     }
 
-    public void newMethod(){
+    public void newMethod() {
 
     }
 }

@@ -13,8 +13,8 @@ public class TestProjectDescriptor extends LightProjectDescriptor {
     public Module createMainModule(@NotNull Project project) {
         Module mainModule = super.createMainModule(project);
         //TODO load entire folder, forget about version info
-        PsiTestUtil.addLibrary(mainModule,"projectRuntimeLibs/easymock-2.0.jar");
-        PsiTestUtil.addLibrary(mainModule,"projectRuntimeLibs/mockito-all-1.10.19.jar");
+        PsiTestUtil.addLibrary(mainModule, "projectRuntimeLibs/easymock-2.0.jar");
+        PsiTestUtil.addLibrary(mainModule, "projectRuntimeLibs/mockito-all-1.10.19.jar");
         return mainModule;
     }
 }
